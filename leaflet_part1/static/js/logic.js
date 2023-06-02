@@ -24,7 +24,7 @@ d3.json(url).then(function(response) {
     let markerSize = magnitude * 5;
 
     // Calculate marker color based on magnitude
-    let markerColor = getColor(magnitude);
+    let markerColor = getColor(coords[2]);
 
     // Create a circle marker with size and color
     L.circleMarker([coords[1], coords[0]], {
@@ -44,18 +44,24 @@ d3.json(url).then(function(response) {
 
   legend.onAdd = function() {
     let div = L.DomUtil.create("div", "info legend");
-    let grades = [0, 1, 2, 3, 4, 5];
-    let colors = ["#00ff00", "#66ff00", "#ccff00", "#ffff00", "#ffcc00", "#ff0000"];
+    let grades = [-10, 10, 30, 50, 70, 90];
+    let colors = ["#98ff00", "#d4ff00", "#ccff00", "#eecc00", "#ffcc00", "#ff0000"];
     let labels = [];
+
+    for (var i = 0; i < grades.length; i++) {
+      div.innerHTML +=
+          '<i style="background-color:' +  colors[i]+'"></i> ' +
+          grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+}
 
     // div.innerHTML += "<strong>Magnitude</strong><br>";
 
-    for (let i = 0; i < grades.length; i++) {
-      labels.push('<ul style="background-color:' + colors[i] + '"><span>' + grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '' : '+') + '</span></ul>');
-    }
+    // for (let i = 0; i < grades.length; i++) {
+    //   labels.push('<ul style="background-color:' + colors[i] + '"><span>' + grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '' : '+') + '</span></ul>');
+    // }
 
-    // Add each label list item to the div under the <ul> tag
-    div.innerHTML += "<ul>" + labels.join("") + "</ul>";
+    // // Add each label list item to the div under the <ul> tag
+    // div.innerHTML += "<ul>" + labels.join("") + "</ul>";
 
     return div;
   };
@@ -63,20 +69,20 @@ d3.json(url).then(function(response) {
   legend.addTo(myMap);
 
   // Define the getColor function to calculate marker color based on magnitude
-  function getColor(magnitude) {
+  function getColor(depth) {console.log(depth)
     switch (true) {
-      case magnitude < 1:
-        return "#00ff00";
-      case magnitude < 2:
-        return "#66ff00";
-      case magnitude < 3:
+      case depth > 90:
+      return "#ff0000";
+      case depth >70:
+      return "#ffcc00";
+      case depth >50:
+        return "#eecc00";
+      case depth >30:
         return "#ccff00";
-      case magnitude < 4:
-        return "#ffff00";
-      case magnitude < 5:
-        return "#ffcc00";
-      default:
-        return "#ff0000";
+      case depth >10:
+        return "#d4ff00";
+    default:
+    return "#98ff00";
     }
   }
 });
