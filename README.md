@@ -1,5 +1,6 @@
 # leaflet-challenge
 
+(https://xc1614.github.io/leaflet-challenge/)
 Your first task is to visualize an earthquake dataset. Complete the following steps:
 
 Get your dataset. To do so, follow these steps:
