@@ -54,15 +54,6 @@ d3.json(url).then(function(response) {
           grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
 }
 
-    // div.innerHTML += "<strong>Magnitude</strong><br>";
-
-    // for (let i = 0; i < grades.length; i++) {
-    //   labels.push('<ul style="background-color:' + colors[i] + '"><span>' + grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '' : '+') + '</span></ul>');
-    // }
-
-    // // Add each label list item to the div under the <ul> tag
-    // div.innerHTML += "<ul>" + labels.join("") + "</ul>";
-
     return div;
   };
 
